@@ -1,0 +1,100 @@
+<h1 class="jasmine-title text-center">Teachers</h1>
+<table class="table">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">Full Name</th>
+    <th scope="col" *ngIf="role=='admin'">Edit</th>
+    <th scope="col" *ngIf="role=='admin'">Delete</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let teacher of teacherService.allTeachers">
+    <td>{{teacher.fullName}}</td>
+    <td>
+      <button class="btn" (click)="edit(teacher)" data-toggle="modal" data-target="#editModel" *ngIf="role=='admin'">
+        Edit
+      </button>
+    </td>
+    <td>
+      <button class="btn text-danger" (click)="delete(teacher.id)" *ngIf="role=='admin'">
+        Delete
+      </button>
+    </td>
+  </tr>
+</table>
+
+<div id="addModel" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 style="margin-left: auto; margin-right: auto" class="modal-title" >Create Teacher</h4>
+      </div>
+      <!-- model body section -->
+      <div class="modal-body">
+        <div class="form-group row">
+          <div class="col-md-6">
+            <label for="fullName">Teacher name:</label>
+            <input #groupName id="fullName" [(ngModel)]="teacherService.currentTeacher.fullName" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-6">
+            <label for="fullName">Username:</label>
+            <input #username id="username" [(ngModel)]="teacherService.currentTeacher.username" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-6">
+            <label for="password">Password:</label>
+            <input type="password" #password id="password" [(ngModel)]="teacherService.currentTeacher.password" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-block" data-dismiss="modal"
+                (click)="create(teacherService.currentTeacher)">Create</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModel" *ngIf="role=='admin'"
+>Add Teacher</button>
+
+<div id="editModel" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 style="margin-left: auto; margin-right: auto" class="modal-title">Edit Teacher</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">
+          <div class="col-md-6">
+            <input value="{{teacherService.currentTeacher?.id}}" #touristId type="hidden"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="newFirstName" class="col-md-4 col-form-label text-md-right">Name:</label>
+          <div class="col-md-6">
+            <input value="{{teacherService.currentTeacher?.fullName}}" #newFirstName id="newFirstName" [(ngModel)]="teacherService.currentTeacher.fullName"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="newPassword" class="col-md-4 col-form-label text-md-right">Password:</label>
+          <div class="col-md-6">
+            <input value="{{teacherService.currentTeacher?.password}}" #newPassword id="newPassword" [(ngModel)]="teacherService.currentTeacher.password"/>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-block" data-dismiss="modal"
+                (click)="update(teacherService.currentTeacher)">
+          Save
+        </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+{
+  "Groups": [
+    {
+      "groupName": "343",
+      "id": 1
+    }
+  ],
+  "Students": [
+    {
+      "id": 1,
+      "fullName": "Yuri Nikitin",
+      "group": "343",
+      "password": "test",
+      "username": "student"
+    }
+  ],
+  "Teachers": [
+    {
+      "fullName": "Alex Orlovskiyyyyy",
+      "id": 1,
+      "password": "test",
+      "username": "teacher"
+    }
+  ],
+  "Subjects": [
+    {
+      "id": 1,
+      "subjectName": "web",
+      "group": "343",
+      "teacher": "Alex Orlovskiyyyyy"
+    }
+  ],
+  "Marks": [
+    {
+      "id": 1,
+      "mark": 100,
+      "teacher": "Alex Orlovskiyyyyy",
+      "student": "Yuri Nikitin",
+      "subject": "web"
+    }
+  ],
+  "Users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin",
+      "role": "admin"
+    },
+    {
+      "username": "teacher",
+      "password": "test",
+      "role": "teacher",
+      "id": 2
+    },
+    {
+      "username": "student",
+      "password": "test",
+      "role": "student",
+      "id": 3
+    },
+    {
+      "username": "teacher",
+      "password": "test",
+      "role": "role",
+      "id": 4
+    }
+  ]
+}

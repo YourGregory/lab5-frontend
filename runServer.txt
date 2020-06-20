@@ -1,0 +1,3 @@
+before run the main host, write in terminal those commands:
+cd src/assets
+json-server --watch db.json

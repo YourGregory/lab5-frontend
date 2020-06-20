@@ -1,0 +1,119 @@
+<h1 class="jasmine-title text-center">Students</h1>
+<table class="table table-hover">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Group</th>
+    <th scope="col" *ngIf="role=='admin'">Edit</th>
+    <th scope="col" *ngIf="role=='admin'">Delete</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let student of service.allStudents">
+    <td>{{student.fullName}}</td>
+    <td>{{student.group}}</td>
+    <td>
+      <button class="btn text-danger" (click)="edit(student)" data-toggle="modal" data-target="#editModel" *ngIf="role=='admin'">
+        Edit
+      </button>
+    </td>
+    <td>
+      <button class="btn text-danger" (click)="delete(student.id)" *ngIf="role=='admin'">
+        Delete
+      </button>
+    </td>
+  </tr>
+</table>
+
+<div id="addModel" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 style="margin-left: auto; margin-right: auto" class="modal-title" >Create Student</h4>
+      </div>
+      <!-- model body section -->
+      <div class="modal-body">
+        <div class="form-group row">
+          <div class="col-md-6">
+            <label for="fullName">Full name:</label>
+            <input #groupName id="fullName" [(ngModel)]="service.currentStudent.fullName" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-6">
+            <label for="fullName">Username:</label>
+            <input #username id="username" [(ngModel)]="service.currentStudent.username" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-6">
+            <label for="password">Password:</label>
+            <input type="password" #password id="password" [(ngModel)]="service.currentStudent.password" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-6">
+            <label for="group">Group:</label>
+            <select #group class="browser-default custom-select form-control" id="group" [(ngModel)]="service.currentStudent.group">
+              <option *ngFor="let group of groupService.allGroups" >{{group.groupName}}</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-block" data-dismiss="modal"
+                (click)="create(service.currentStudent, group.value)">Create</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModel" *ngIf="role=='admin'"
+>Add Student</button>
+
+<div id="editModel" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 style="margin-left: auto; margin-right: auto" class="modal-title">Edit Student</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">
+          <div class="col-md-6">
+            <input value="{{service.currentStudent?.id}}" #touristId type="hidden"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="newFirstName" class="col-md-4 col-form-label text-md-right">Name:</label>
+          <div class="col-md-6">
+            <input value="{{service.currentStudent.fullName}}" #newFirstName id="newFirstName" [(ngModel)]="service.currentStudent.fullName"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="newPassword" class="col-md-4 col-form-label text-md-right">Password:</label>
+          <div class="col-md-6">
+            <input value="{{service.currentStudent?.password}}" #newPassword id="newPassword" [(ngModel)]="service.currentStudent.password"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="newGroup" class="col-md-4 col-form-label text-md-right">Group:</label>
+          <div class="col-md-6">
+            <select #newGroup class="browser-default custom-select form-control" id="newGroup" [(ngModel)]="service.currentStudent.group">
+              <option *ngFor="let group of groupService.allGroups" >{{group.groupName}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-block" data-dismiss="modal"
+                (click)="update(service.currentStudent, newGroup.value)">
+          Save
+        </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

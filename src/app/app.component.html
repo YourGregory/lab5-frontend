@@ -1,0 +1,16 @@
+<!-- nav -->
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+  <div class="navbar-nav">s
+    <a class="nav-item nav-link" routerLink="/groups">Groups</a>
+    <a class="nav-item nav-link" routerLink="/students">Students</a>
+    <a class="nav-item nav-link" routerLink="/teachers">Teachers</a>
+    <a class="nav-item nav-link" routerLink="/subjects">Subjects</a>
+    <a class="nav-item nav-link" routerLink="/marks">Marks</a>
+    <a class="nav-item nav-link" (click)="logout()">Logout</a>
+  </div>
+</nav>
+
+<!-- main app container -->
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
